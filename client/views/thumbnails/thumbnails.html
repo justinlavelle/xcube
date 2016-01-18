@@ -5,15 +5,24 @@
 
 	<div class="col-sm-6 col-md-4">
 		<div class="thumbnail">
-			<img class="image" src="{{ image.url }}">
+			<iframe src="{{vidFileUrl}}"></iframe>
+
+			<!-- <video id="example_video_1" class="video-js vjs-default-skin"
+		  controls preload="auto" width="640" height="264"
+		  poster="http://video-js.zencoder.com/oceans-clip.png"
+		  data-setup='{"example_option":true}'>
+		 <source src="{{vidFileUrl}}" type='video' /> -->
+		 <!-- <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+		</video> -->
+			<!-- <img class="image" src="{{ image.url }}"> -->
 			<div class="caption">
 					<h3><a href={{themeUrl category canonicalName}}>{{title}}</a></h3>
 					<p>{{themeDescription _id}}</p>
 					<p>{{getCategoryFromId category}}</p>
-					<p>
+					<!-- <p>
 						<a href="{{previewUrl}}" class="btn btn-primary" role="button">Preview</a>
 						<a href="{{downloadUrl}}" class="btn btn-default" role="button">Download</a>
-					</p>
+					</p> -->
 			</div>
 		</div>
 	</div>
