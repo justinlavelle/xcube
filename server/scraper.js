@@ -3,7 +3,8 @@ Meteor.methods({
   videoUrl: function(url) {
     result = Meteor.http.get(url);
     $ = cheerio.load(result.content);
-    _body = $('.popup-embed-code').find('iframe').attr('src');
+    //_body = $('.redtube-flv-player').find('video').html();
+    _body = $('.redtube-flv-player').find('video').find('source').attr('src');
     return _body;
   }
 });
