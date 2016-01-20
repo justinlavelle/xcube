@@ -15,13 +15,16 @@
 			<span class="cat" itemprop="category">
 				{{getCategoryFromId category}}<span class="price"> / {{type}}</span>
 			</span>
-
-			<img class="image" itemprop="image" src="{{ image.url }}">
+				<video src="{{vidFileUrl}}" controls played width="50%">
+			  Sorry, your browser doesn't support embedded videos,
+			  but don't worry, you can <a href="videofile.ogg">download it</a>
+			  and watch it with your favorite video player!
+			</video>
 			<p class="desc">{{{description}}}</p>
-			
+
 			<p class="info">
-          		<a href="{{previewUrl}}" class="btn btn-primary" role="button">Preview</a>
-          		<a href="{{downloadUrl}}" class="btn btn-default" role="button">Download</a>
+          		<!-- <a href="{{previewUrl}}" class="btn btn-primary" role="button">Preview</a>
+          		<a href="{{downloadUrl}}" class="btn btn-default" role="button">Download</a> -->
 
 				<div id="disqus_thread"></div>
 			</p>
@@ -70,7 +73,7 @@
 </script>
 
 <noscript>
-	Please enable JavaScript to view the 
+	Please enable JavaScript to view the
 	<a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by
 	Disqus.</a>
 </noscript>

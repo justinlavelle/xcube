@@ -1,6 +1,6 @@
 Template.category.helpers(
 {
-	themes: function() 
+	themes: function()
 	{
 		var cat = Categories.findOne({canonicalName: FlowRouter.current().params.category});
 
@@ -9,6 +9,7 @@ Template.category.helpers(
 
 		var themes = Themes.find({category: cat._id});
 		return themes;
+		console.log(themes);
 	},
 	categoryName: function()
 	{
