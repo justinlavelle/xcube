@@ -1,15 +1,15 @@
 Template.category.helpers(
 {
-	themes: function()
+	videos: function()
 	{
 		var cat = Categories.findOne({canonicalName: FlowRouter.current().params.category});
 
 		if(!cat)
 			return FlowRouter.go('/404');
 
-		var themes = Themes.find({category: cat._id});
-		return themes;
-		console.log(themes);
+		var videos = Videos.find({category: cat._id});
+		return videos;
+		console.log(videos);
 	},
 	categoryName: function()
 	{
@@ -20,5 +20,5 @@ Template.category.helpers(
 Template.category.onCreated(function()
 {
 	this.subscribe('Categories');
-	this.subscribe('Themes');
+	this.subscribe('Videos');
 });

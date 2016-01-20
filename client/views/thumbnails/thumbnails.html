@@ -1,21 +1,14 @@
 <template name="thumbnails">
 {{#if Template.subscriptionsReady}}
 
-{{#each themes}}
+{{#each videos}}
 
 	<div class="col-sm-6 col-md-4">
 		<div class="thumbnail">
-			<!-- <iframe src="{{vidFileUrl}}" width="370px" height=""></iframe> -->
-			<!-- <video src="{{vidFileUrl}}" width="370px" poster="{{ image.url }}"></video> -->
-			<img class="image" src="{{ image.url }}">
+
+			<a href={{videoUrl category canonicalName}}><img class="image" src="{{ image.url }}"></a>
 			<div class="caption">
-					<h3><a href={{themeUrl category canonicalName}}>{{title}}</a></h3>
-					<p>{{themeDescription _id}}</p>
-					<p>{{getCategoryFromId category}}</p>
-					<!-- <p>
-						<a href="{{previewUrl}}" class="btn btn-primary" role="button">Preview</a>
-						<a href="{{downloadUrl}}" class="btn btn-default" role="button">Download</a>
-					</p> -->
+					<h3><a href={{videoUrl category canonicalName}}>{{title}}</a></h3>
 			</div>
 		</div>
 	</div>

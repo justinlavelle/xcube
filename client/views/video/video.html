@@ -1,8 +1,8 @@
-<template name="theme">
+<template name="video">
 
 {{#if Template.subscriptionsReady}}
 
-{{#with theme}}
+{{#with video}}
 
 <div class="moveRight" id="main">
 	<div id="overlay"></div>
@@ -11,21 +11,13 @@
 		<meta itemprop="description" content="{{shorterText description}}"/>
 		<div class="container">
 			<h1 itemprop="name">{{title}}</h1>
-
-			<span class="cat" itemprop="category">
-				{{getCategoryFromId category}}<span class="price"> / {{type}}</span>
-			</span>
-				<video src="{{vidFileUrl}}" controls played width="50%">
+				<video src="{{vidFileUrl}}" controls played width="50%" error="errorVid(this)">
 			  Sorry, your browser doesn't support embedded videos,
 			  but don't worry, you can <a href="videofile.ogg">download it</a>
 			  and watch it with your favorite video player!
 			</video>
-			<p class="desc">{{{description}}}</p>
-
+			<br><br>
 			<p class="info">
-          		<!-- <a href="{{previewUrl}}" class="btn btn-primary" role="button">Preview</a>
-          		<a href="{{downloadUrl}}" class="btn btn-default" role="button">Download</a> -->
-
 				<div id="disqus_thread"></div>
 			</p>
 		</div>

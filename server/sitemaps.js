@@ -14,15 +14,15 @@ sitemaps.add('/sitemap.xml', function()
 		});
 	});
 
-	var themes = Themes.find().fetch();
+	var videos = Videos.find().fetch();
 
-	_.each(themes, function(theme)
+	_.each(videos, function(video)
 	{
-		var category = Categories.findOne(theme.category);
+		var category = Categories.findOne(video.category);
 
 		out.push(
 		{
-			page: category.canonicalName + '/' + theme.canonicalName
+			page: category.canonicalName + '/' + video.canonicalName
 		});
 	});
 

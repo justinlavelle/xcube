@@ -1,8 +1,8 @@
 Template.thumbnails.helpers(
 {
-  themes: function()
+  videos: function()
   {
-    var themes = Themes.find();
+    var videos = Videos.find({});
 
     SEO.set(
     {
@@ -18,11 +18,11 @@ Template.thumbnails.helpers(
       }
     });
 
-    return themes;
+    return videos;
   },
-  'themeUrl': function(catId, theme)
+  'videoUrl': function(catId, video)
   {
-  	if(!catId || !theme)
+  	if(!catId || !video)
   		return;
 
     var cat = Categories.findOne(catId);
@@ -30,18 +30,18 @@ Template.thumbnails.helpers(
     if(!cat)
       return;
 
-  	return FlowRouter.url('/' + cat.canonicalName + '/' + theme);
+  	return FlowRouter.url('/' + cat.canonicalName + '/' + video);
   },
-  'themeDescription': function(Id)
+  'videoDescription': function(Id)
   {
-    var theme = Themes.findOne(Id);
-    var desc = $('<p>').html(theme.description).text(); //Removing all HTML tags
+    var video = Videos.findOne(Id);
+    var desc = $('<p>').html(video.description).text(); //Removing all HTML tags
     return desc.slice(0, 100) + '...';
   }
 });
 
 Template.thumbnails.onCreated(function()
 {
-  this.subscribe('themes');
+  this.subscribe('videos');
   this.subscribe('categories');
 });
