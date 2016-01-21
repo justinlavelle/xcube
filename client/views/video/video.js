@@ -48,6 +48,7 @@ Template.video.onCreated(function()
 });
 
 function vidUrlResponse(video) {
+
 	Meteor.call('vidUrlChecker', video.vidFileUrl, function(err, res){
 		if (res) {
 			if (res.response.hasOwnProperty('statusCode')) {
@@ -82,7 +83,3 @@ function updateVidUrl(_id, url) {
 	Meteor.call('updateVidUrl', _id, {'vidFileUrl': url});
 	//Videos.update(_id, {$set : {'vidFileUrl': url}});
 }
-
-Template.body.onRendered( function (){
-	console.log('rendered body');
-});
