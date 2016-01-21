@@ -26,3 +26,10 @@ UI.registerHelper('shorterText', function(text)
 {
 	return shorterText(text);
 });
+
+UI.registerHelper('videoDescription', function(Id)
+{
+	var video = Videos.findOne(Id);
+	var desc = $('<p>').html(video.description).text(); //Removing all HTML tags
+	return desc.slice(0, 100) + '...';
+});
