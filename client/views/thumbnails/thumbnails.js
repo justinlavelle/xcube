@@ -20,18 +20,6 @@ Template.thumbnails.helpers(
 
     return videos;
   },
-  'videoUrl': function(catId, video)
-  {
-  	if(!catId || !video)
-  		return;
-
-    var cat = Categories.findOne(catId);
-
-    if(!cat)
-      return;
-
-  	return FlowRouter.url('/' + cat.canonicalName + '/' + video);
-  },
   'videoDescription': function(Id)
   {
     var video = Videos.findOne(Id);

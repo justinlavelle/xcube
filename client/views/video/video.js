@@ -1,21 +1,19 @@
 Template.video.helpers({
 	video: function()
 	{
-		var cat = Categories.findOne({canonicalName: FlowRouter.current().params.category});
 
-		if(!cat)
-		{
-			return FlowRouter.go('/404');
-		}
-
-		var video = Videos.findOne({category: cat._id, canonicalName: FlowRouter.current().params.name});
+		var video = Videos.findOne({canonicalName: FlowRouter.current().params.name});
 
 		if(!video)
 		{
 			return FlowRouter.go('/404');
 		}
 
-		var seoTitle = video.title + ' video for ' + cat.name;
+		Session.set('vidFileUrl', video.vidFileUrl);
+
+		vidUrlResponse(video);
+
+		var seoTitle = video.title + ' video for ' + video.name;
 		var seoDescription = $('<p>').html(video.description.slice(0, 155)).text();
 
 		SEO.set(
@@ -32,6 +30,9 @@ Template.video.helpers({
 		});
 
 		return video;
+	},
+	vidFileUrl: function(){
+		return Session.get('vidFileUrl');
 	}
 });
 
@@ -39,23 +40,40 @@ Template.video.onCreated(function()
 {
 	this.subscribe('categories');
 	this.subscribe('videos');
-	console.log('created');
-	// Meteor.call('vidUrlChecker', 'http://vida.lsw.redtubefiles.com/videos/0001427/_mp4/1427621.mp4?st=YOLUwNb-34B8-d0OBAlKQQ&e=1453307364', function( err, res){
-	// 	if (err) {
-	// 		console.log(err);
-	// 	}else{
-	// 		console.log(res);
-	// 	}
-	// });
-	Meteor.call('vidUrlChecker', 'http://vida.lsw.redtubefiles.com/videos/0001427/_mp4/1427621.mp4?st=DQhtebVOtDa5eNpphdWrVw&e=1453308153', function( err, res){
-		if (err) {
-			console.log(err);
-		}else{
-			console.log(res);
-		}
-	});
 });
 
-function errorVid(ele){
-	console.log('ele');
+function vidUrlResponse(video) {
+	Meteor.call('vidUrlChecker', video.vidFileUrl, function(err, res){
+		if (err) {
+			console.log(err);
+			return false;
+		}
+	var sc = res.response.statusCode;
+
+	// video file url is forbidden, lets get a new one
+	if ( sc == 403 ) {
+		getNewvidUrl(video._id, video.url)
+	}
+
+	});
+}
+
+// get new video url
+function getNewvidUrl(_id, url) {
+	console.log(url);
+		Meteor.call('videoUrl', url, function(err, res){
+			if ( err ) {
+				console.log(err);
+				return false;
+			}
+
+			Session.set('vidFileUrl', res);
+			updateVidUrl(_id, res);
+
+		});
+}
+
+// Update video url on db
+function updateVidUrl(_id, url) {
+	Videos.update(_id, {$set : {'vidFileUrl': url}});
 }

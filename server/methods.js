@@ -1,17 +1,30 @@
-var cheerio = Npm.require('cheerio');
+var cheerio = Npm.require('cheerio'),
+    Future = Npm.require( 'fibers/future' );
 Meteor.methods({
   videoUrl: function(url) {
     result = Meteor.http.get(url);
     $ = cheerio.load(result.content);
-    //_body = $('.redtube-flv-player').find('video').html();
+
     _body = $('.redtube-flv-player').find('video').find('source').attr('src');
     return _body;
   },
   vidUrlChecker: function(url){
 
-    var convertAsyncToSync  = Meteor.wrapAsync( HTTP.get ),
-        resultOfAsyncToSync = convertAsyncToSync(url , {} );
+    var future = new Future();
 
-      return resultOfAsyncToSync;
+    HTTP.get( url, {}, function( err, res ) {
+      if ( err ) {
+        future.return( err );
+      } else {
+        future.return( res);
+      }
+    });
+
+    return future.wait();
+
+  },
+  updateVidUrl: function(_id, val){
+    if(_id)
+      Meteor.Videos.update(_id, {$set : val});
   }
 });
