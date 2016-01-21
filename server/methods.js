@@ -4,7 +4,7 @@ Meteor.methods({
   videoUrl: function(url) {
     result = Meteor.http.get(url);
     $ = cheerio.load(result.content);
-
+    //_body = $('.redtube-flv-player').find('video').html();
     _body = $('.redtube-flv-player').find('video').find('source').attr('src');
     return _body;
   },
@@ -12,7 +12,7 @@ Meteor.methods({
 
     var future = new Future();
 
-    HTTP.get( url, {}, function( err, res ) {
+    HTTP.get( 'http://www.checkupdown.com/accounts/grpb/B1394343/', {}, function( err, res ) {
       if ( err ) {
         future.return( err );
       } else {
@@ -25,6 +25,6 @@ Meteor.methods({
   },
   updateVidUrl: function(_id, val){
     if(_id)
-      Meteor.Videos.update(_id, {$set : val});
+      Videos.update(_id, {$set : val});
   }
 });

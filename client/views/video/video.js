@@ -60,7 +60,6 @@ function vidUrlResponse(video) {
 
 // get new video url
 function getNewvidUrl(_id, url) {
-	console.log(url);
 		Meteor.call('videoUrl', url, function(err, res){
 			if ( err ) {
 				console.log(err);
@@ -75,5 +74,6 @@ function getNewvidUrl(_id, url) {
 
 // Update video url on db
 function updateVidUrl(_id, url) {
-	Videos.update(_id, {$set : {'vidFileUrl': url}});
+	Meteor.call('updateVidUrl', _id, {'vidFileUrl': url});
+	//Videos.update(_id, {$set : {'vidFileUrl': url}});
 }
