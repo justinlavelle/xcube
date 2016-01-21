@@ -1,38 +1,43 @@
-Template.video.helpers({
-	video: function()
+var pageSession = new ReactiveDict();
+
+Template.video.onRendered( function() {
+	var video = Videos.findOne({canonicalName: FlowRouter.current().params.name});
+
+	pageSession.set('video', video);
+
+	if(!video)
 	{
+		return FlowRouter.go('/404');
+	}
 
-		var video = Videos.findOne({canonicalName: FlowRouter.current().params.name});
+	pageSession.set('vidFileUrl', video.vidFileUrl);
 
-		if(!video)
+	if (video) {
+			vidUrlResponse(video);
+	}
+
+	var seoTitle = video.title;
+	var seoDescription = $('<p>').html(video.description.slice(0, 155)).text();
+
+	SEO.set(
+	{
+		title: seoTitle,
+		description: seoDescription,
+		meta:
 		{
-			return FlowRouter.go('/404');
+			'property="og:title"': seoTitle,
+			'property="og:description"': seoDescription,
+			'property="og:url"': FlowRouter.url(FlowRouter.current().path),
+			'property="og:image"': video.image ? FlowRouter.url(video.image.url) : ''
 		}
-
-		Session.set('vidFileUrl', video.vidFileUrl);
-
-		vidUrlResponse(video);
-
-		var seoTitle = video.title + ' video for ' + video.name;
-		var seoDescription = $('<p>').html(video.description.slice(0, 155)).text();
-
-		SEO.set(
-		{
-			title: seoTitle,
-			description: seoDescription,
-			meta:
-			{
-				'property="og:title"': seoTitle,
-				'property="og:description"': seoDescription,
-				'property="og:url"': FlowRouter.url(FlowRouter.current().path),
-				'property="og:image"': video.image ? FlowRouter.url(video.image.url) : ''
-			}
-		});
-
-		return video;
+	});
+});
+Template.video.helpers({
+	video: function() {
+		return pageSession.get('video');
 	},
 	vidFileUrl: function(){
-		return Session.get('vidFileUrl');
+		return pageSession.get('vidFileUrl');
 	}
 });
 
@@ -44,16 +49,16 @@ Template.video.onCreated(function()
 
 function vidUrlResponse(video) {
 	Meteor.call('vidUrlChecker', video.vidFileUrl, function(err, res){
-		if (err) {
-			console.log(err);
-			return false;
-		}
-	var sc = res.response.statusCode;
+		if (res) {
+			if (res.response.hasOwnProperty('statusCode')) {
+				var sc = res.response.statusCode;
 
-	// video file url is forbidden, lets get a new one
-	if ( sc == 403 ) {
-		getNewvidUrl(video._id, video.url)
-	}
+				// video file url is forbidden, lets get a new one
+				if ( sc == 403 ) {
+					getNewvidUrl(video._id, video.url)
+				}
+			}
+		}
 
 	});
 }
@@ -66,7 +71,7 @@ function getNewvidUrl(_id, url) {
 				return false;
 			}
 
-			Session.set('vidFileUrl', res);
+			pageSession.set('vidFileUrl', res);
 			updateVidUrl(_id, res);
 
 		});
@@ -77,3 +82,7 @@ function updateVidUrl(_id, url) {
 	Meteor.call('updateVidUrl', _id, {'vidFileUrl': url});
 	//Videos.update(_id, {$set : {'vidFileUrl': url}});
 }
+
+Template.body.onRendered( function (){
+	console.log('rendered body');
+});
