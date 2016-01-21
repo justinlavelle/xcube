@@ -51,11 +51,12 @@ function vidUrlResponse(video) {
 
 	Meteor.call('vidUrlChecker', video.vidFileUrl, function(err, res){
 		if (res) {
+
 			if (res.response.hasOwnProperty('statusCode')) {
 				var sc = res.response.statusCode;
 
 				// video file url is forbidden, lets get a new one
-				if ( sc == 403 ) {
+				if ( sc == 403 || sc == 400) {
 					getNewvidUrl(video._id, video.url)
 				}
 			}

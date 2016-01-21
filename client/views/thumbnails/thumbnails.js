@@ -1,5 +1,11 @@
 var pageSession = new ReactiveDict();
 
+Template.thumbnails.onCreated(function()
+{
+  this.subscribe('themes');
+  this.subscribe('categories');
+});
+
 Template.thumbnails.onRendered( function() {
 
   var videos = Videos.find({}, {sort: {created: -1}}).fetch();
