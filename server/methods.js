@@ -12,7 +12,7 @@ Meteor.methods({
 
     var future = new Future();
 
-    HTTP.get( 'http://www.checkupdown.com/accounts/grpb/B1394343/', {}, function( err, res ) {
+    HTTP.get( url, {}, function( err, res ) {
       if ( err ) {
         future.return( err );
       } else {
