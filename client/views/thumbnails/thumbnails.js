@@ -30,6 +30,7 @@ Template.thumbnails.onRendered( function() {
 Template.thumbnails.helpers(
 {
   videos: function() {
-    return pageSession.get('videos');
+    var videos = pageSession.get('videos');
+    return (videos) ? videos : [];
   }
 });

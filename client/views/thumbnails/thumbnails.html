@@ -1,5 +1,5 @@
 <template name="thumbnails">
-{{#if Template.subscriptionsReady}}
+{{#if videos}}
 
 {{#each videos}}
 
@@ -9,7 +9,7 @@
 			<a href="/p/{{canonicalName}}"><img class="image" src="{{ image.url }}"></a>
 			<div class="caption">
 					<h3><a href="/p/{{canonicalName}}">{{title}}</a></h3>
-					<p>{{videoDescription _id}}</p>
+					<p>{{videoDescription _id true}}</p>
 					<p>{{getCategoryFromId category}}</p>
 			</div>
 		</div>
@@ -19,7 +19,7 @@
 
 {{else}}
 
-Loading...
+<h5 class="loading">Loading...</h5>
 
 {{/if}}
 </template>

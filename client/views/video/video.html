@@ -9,14 +9,15 @@
 		<meta itemprop="description" content="{{shorterText description}}"/>
 		<div class="container">
 			<h1 itemprop="name">{{title}}</h1>
-			<span class="cat" itemprop="desc">
-				{{videoDescription _id}}
-			</span>
 				<video src="{{vidFileUrl}}" controls width="50%">
 			  Sorry, your browser doesn't support embedded videos,
 			  but don't worry, you can <a href="videofile.ogg">download it</a>
 			  and watch it with your favorite video player!
 			</video>
+			<br>
+			<span class="cat" itemprop="desc">
+				{{videoDescription _id false}}
+			</span>
 			<br><br>
 			<p class="info">
 				<div id="disqus_thread"></div>
