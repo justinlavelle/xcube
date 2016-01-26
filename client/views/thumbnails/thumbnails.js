@@ -1,16 +1,9 @@
-var pageSession = new ReactiveDict();
-
-Template.thumbnails.onCreated(function()
-{
-  this.subscribe('themes');
-  this.subscribe('categories');
-});
+var videos = [];
 
 Template.thumbnails.onRendered( function() {
 
-  var videos = Videos.find({}, {sort: {created: -1}}).fetch();
+  videos = Videos.find({}, {sort: {created: -1}}).fetch();
 
-  pageSession.set('videos', videos);
 
   SEO.set(
   {
@@ -30,7 +23,15 @@ Template.thumbnails.onRendered( function() {
 Template.thumbnails.helpers(
 {
   videos: function() {
-    var videos = pageSession.get('videos');
-    return (videos) ? videos : [];
+    var videos = Videos.find({}, {sort: {created: -1}}).fetch();
+    return videos;
+  }
+});
+
+Template.plugs.helpers({
+  plugs: function(){
+    var plugs = Plugs.find({}, {sort: {created: -1}}).fetch();
+
+    return plugs;
   }
 });
