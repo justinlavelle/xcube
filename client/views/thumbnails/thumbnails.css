@@ -10,12 +10,13 @@ background-color:#303031;
 }
 
 .caption h3{
-	font-size:18px;
 	margin:0;
+		margin-bottom: 15px;
 }
 
 .caption h3 a{
 	color:#A3A3A3;
+
 }
 
 .cat{
@@ -26,10 +27,24 @@ padding: 3px 5px 1px;
 text-transform: uppercase;
 font-weight: normal;
 vertical-align: middle;
+color: #444;
+font-weight: bold;
 }
 
 .desc{
 	font-size: 13px;
 color: #B3C1C6;
 line-height: 1.5;
+
+}
+
+.aImg{
+	height: 200px;
+overflow: hidden;
+display: block;
+}
+
+.plugsDivide {
+    padding-left: 15px;
+    color: rgb(167, 167, 167);
 }
