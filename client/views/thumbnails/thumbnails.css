@@ -1,0 +1,35 @@
+.thumbnail{
+	padding: 0px;
+border: medium none;
+border-radius: 6px 6px 0px 0px;
+background-color:#303031;
+}
+
+.thumbnail a img{
+	border-radius:6px 6px 0 0;
+}
+
+.caption h3{
+	font-size:18px;
+	margin:0;
+}
+
+.caption h3 a{
+	color:#A3A3A3;
+}
+
+.cat{
+	display: inline-block;
+font-size: 12px;
+background: #EEE none repeat scroll 0% 0%;
+padding: 3px 5px 1px;
+text-transform: uppercase;
+font-weight: normal;
+vertical-align: middle;
+}
+
+.desc{
+	font-size: 13px;
+color: #B3C1C6;
+line-height: 1.5;
+}

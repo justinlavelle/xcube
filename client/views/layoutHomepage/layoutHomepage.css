@@ -1,0 +1,21 @@
+html,body{
+	height: 100%;
+	width:100%;
+	margin: 0;
+	padding: 0;
+	overflow-x:hidden;
+	background-color: #232324;
+}
+
+.row{
+	margin-right:0;
+	margin-left: 0;
+}
+
+h1.siteTitle{
+text-align: center;
+margin-top: 60px;
+display: block;
+overflow: hidden;
+margin-bottom: 60px;
+}
