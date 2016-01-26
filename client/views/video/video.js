@@ -1,6 +1,10 @@
 var pageSession = new ReactiveDict();
 
 Template.video.onRendered( function() {
+
+	this.subscribe('categories');
+	this.subscribe('videos');
+
 	var video = Videos.findOne({canonicalName: FlowRouter.current().params.name});
 
 	pageSession.set('video', video);
