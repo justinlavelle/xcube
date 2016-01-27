@@ -42,6 +42,10 @@ line-height: 1.5;
 	height: 200px;
 overflow: hidden;
 display: block;
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+border-radius:6px 6px 0 0;
 }
 
 .plugsDivide {
