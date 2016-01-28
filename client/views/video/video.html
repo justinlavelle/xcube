@@ -7,15 +7,15 @@
 
 	<div class="mainContent contTheme" itemscope itemtype="http://schema.org/Product">
 		<meta itemprop="description" content="{{shorterText description}}"/>
-		<div class="container">
+		<div class="container videoCont">
 			<div class="col-md-8">
-			<h1 itemprop="name" class="videoTitle">{{title}}</h1>
+
 			<video src="{{vidFileUrl}}" controls width="100%">
 			  Sorry, your browser doesn't support embedded videos,
 			  but don't worry, you can <a href="videofile.ogg">download it</a>
 			  and watch it with your favorite video player!
 			</video>
-			<br>
+			<h1 itemprop="name" class="videoTitle">{{title}}</h1>
 			<p class="videoDesc" itemprop="desc">
 				{{videoDescription _id false}}
 			</p>

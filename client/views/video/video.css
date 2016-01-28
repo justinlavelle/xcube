@@ -3,8 +3,6 @@
 text-transform: capitalize;
 font-size: 1.8em;
 font-weight: bold;
-margin-bottom: 20px;
-margin-top: 60px;
 }
 
 .videoDesc{
@@ -17,16 +15,19 @@ strong {
 }
 
 .videoSidebar{
-	min-width: 335px;
+max-width: 335px;
 height: 100%;
 display: block;
 background: #2A2A2C none repeat scroll 0% 0%;
 overflow: hidden;
-margin-top: 60px;
 padding-bottom:20px;
 border-radius:6px;
 }
 
 .videoSidebar img{
 	margin-top:20px;
+}
+
+.videoCont{
+	padding-top: 40px;
 }
