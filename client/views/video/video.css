@@ -33,9 +33,42 @@ min-height: 800px;
 	padding-top: 40px;
 }
 
-@media screen  and (max-device-width: 992px)   {
+@media screen  and (max-device-width: 1199px)   {
+	.container{
+		width:100%;
+	}
+}
+
+@media screen  and (max-device-width: 1040px)   {
+	.videoCont .col-md-8{
+		width:60%;
+		float:left;
+	}
+
 	.videoSidebar{
+		float: right;
+		margin-right: 10px;
+	}
+}
+
+@media screen  and (max-device-width: 880px)   {
+	.videoCont .col-md-8{
+		width:50%!important;
+	}
+}
+
+@media screen  and (max-device-width: 710px)   {
+	.videoCont .col-md-8, .videoSidebar{
+		width:100%!important;
 		max-width:100%;
 		height: auto;
+		min-height: auto;
+		margin-right: 0;
 	}
+
+	.videoSidebar{
+		margin-bottom: 20px;
+		text-align: center;
+	}
+
 }
