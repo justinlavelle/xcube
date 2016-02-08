@@ -3,14 +3,13 @@
 <div class="row">
 	{{#each videos}}
 
-		<div class="col-sm-6 col-md-4">
+		<div class="col-sm-4 col-md-3 col-xs-6">
 			<div class="thumbnail">
-
-				<a href="/p/{{canonicalName}}"><img class="image" src="{{ image.url }}"></a>
+				<a href="/p/{{canonicalName}}" class="aImg" rel="nofollow" style="background-image:url('{{image.url}}')"></a>
 				<div class="caption">
 						<h3><a href="/p/{{canonicalName}}">{{title}}</a></h3>
-						<p>{{videoDescription _id true}}</p>
-						<p>{{getCategoryFromId category}}</p>
+						<!--<p class="desc">{{videoDescription _id true}}</p>-->
+						<p class="cat">{{getCategoryFromId category}}</p>
 				</div>
 			</div>
 		</div>
@@ -19,20 +18,20 @@
 </div>
 
 <div class="row">
-	<h2>PLUGS</h2>
+	<h2 class="plugsDivide">PLUGS</h2>
 	{{> plugs}}
 </div>
 </template>
 <template name="plugs">
 	{{#each plugs}}
 
-		<div class="col-sm-6 col-md-4">
+		<div class="col-sm-6 col-md-3">
 			<div class="thumbnail">
 
-				<a href="{{url}}" target="_blank"><img class="image" src="{{ image.url }}"></a>
+				<a href="{{url}}" target="_blank" class="aImg" rel="nofollow"><img class="image" src="{{ image.url }}"></a>
 				<div class="caption">
 						<h3><a href="{{url}}">{{title}}</a></h3>
-						<p>{{getCategoryFromId category}}</p>
+						<p class="cat">{{getCategoryFromId category}}</p>
 				</div>
 			</div>
 		</div>

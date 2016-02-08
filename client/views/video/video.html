@@ -7,49 +7,30 @@
 
 	<div class="mainContent contTheme" itemscope itemtype="http://schema.org/Product">
 		<meta itemprop="description" content="{{shorterText description}}"/>
-		<div class="container">
-			<h1 itemprop="name">{{title}}</h1>
-				<video src="{{vidFileUrl}}" controls width="50%">
+		<div class="container videoCont">
+			<div class="col-md-8">
+
+			<video src="{{vidFileUrl}}" controls width="100%">
 			  Sorry, your browser doesn't support embedded videos,
 			  but don't worry, you can <a href="videofile.ogg">download it</a>
 			  and watch it with your favorite video player!
 			</video>
-			<br>
-			<span class="cat" itemprop="desc">
+			<h1 itemprop="name" class="videoTitle">{{title}}</h1>
+			<p class="videoDesc" itemprop="desc">
 				{{videoDescription _id false}}
-			</span>
+			</p>
 			<br><br>
 			<p class="info">
 				<div id="disqus_thread"></div>
 			</p>
+			</div>
+			<div class="col-md-4 videoSidebar">
+				<img src="http://placehold.it/300x250">
+				<img src="http://placehold.it/300x250">
+			</div>
 		</div>
 	</div>
 
-	<div id="themeFooter" class="row rowService rowMore">
-
-		<footer>
-   			<div class="themeContact container">
-				<ul class="ulSocials">
-					<li>
-						<a class="iconTw" href="https://twitter.com/vanila_io">
-						<i class="fa fa-twitter"></i></a>
-					</li>
-					<li>
-						<a class="iconFb" href="https://www.facebook.com/Vanilaio-1640968586167308/">
-						<i class="fa fa-facebook"></i></a>
-					</li>
-					<li>
-						<a class="iconLi" href="https://www.linkedin.com/company/vanila-io---web-studio">
-						<i class="fa fa-linkedin"></i></a>
-					</li>
-				</ul>
-				<span class="themeEmail">
-				    Our email: <span>stefan@vanila.io</span>
-				</span>
-   			</div>
-		</footer>
-
-	</div>
 </div>
 
 
@@ -73,6 +54,6 @@
 </noscript>
 
 {{/with}}
-
+{{> footer}}
 
 </template>
