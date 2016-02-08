@@ -28,7 +28,7 @@ sitemaps.add('/sitemap.xml', function()
 				loc: video.vidFileUrl ? video.vidFileUrl : '',
 				title: video.title,
 				description: video.description,
-				thumbnail_loc: video.image ? video.image : ''
+				thumbnail_loc: video.image ? video.image.url : ''
 			}],
 			changefreq: 'hourly'
 		});
