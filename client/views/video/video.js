@@ -28,7 +28,7 @@ Template.video.onRendered( function() {
 		description: seoDescription,
 		meta:
 		{
-			'property="og:title"': seoTitle,
+			'property="og:title"': seoTitle.slice(0, 54),
 			'property="og:description"': seoDescription,
 			'property="og:url"': FlowRouter.url(FlowRouter.current().path),
 			'property="og:image"': video.image ? FlowRouter.url(video.image.url) : ''

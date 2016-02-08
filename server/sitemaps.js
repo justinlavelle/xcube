@@ -26,7 +26,7 @@ sitemaps.add('/sitemap.xml', function()
 			{
 				loc: video.vidFileUrl ? video.vidFileUrl : '',
 				title: video.title,
-				description: video.description,
+				description: video.description.replace(/<(?:.|\n)*?>/gm, ''),
 			}],
 			changefreq: 'hourly'
 		}

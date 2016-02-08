@@ -1,6 +1,6 @@
 Meteor.startup(function()
 {
-	var i = setInterval(function()
+	/*var i = setInterval(function()
 	{
 		if(!orion.dictionary.isReady())
 			return;
@@ -16,6 +16,6 @@ Meteor.startup(function()
 			ga('create', orion.dictionary.get('seo.ga'), 'auto');
 			ga('send', 'pageview');
 		});
-	}, 100);
+	}, 100);*/
 
 });
