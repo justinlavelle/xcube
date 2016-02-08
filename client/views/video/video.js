@@ -41,7 +41,7 @@ Template.video.helpers({
 		return pageSession.get('video');
 	},
 	vidFileUrl: function(){
-		return pageSession.get('vidFileUrl');
+		return Videos.findOne({canonicalName: FlowRouter.current().params.name}).vidFileUrl;
 	}
 });
 
@@ -53,38 +53,6 @@ Template.video.onCreated(function()
 
 function vidUrlResponse(video) {
 
-	Meteor.call('vidUrlChecker', video.vidFileUrl, function(err, res){
-		if (res) {
-
-			if (res.response.hasOwnProperty('statusCode')) {
-				var sc = res.response.statusCode;
-
-				// video file url is forbidden, lets get a new one
-				if ( sc == 403 || sc == 400) {
-					getNewvidUrl(video._id, video.url)
-				}
-			}
-		}
-
+	Meteor.call('vidUrlChecker', video._id, video.vidFileUrl, function(err, res){
 	});
-}
-
-// get new video url
-function getNewvidUrl(_id, url) {
-		Meteor.call('videoUrl', url, function(err, res){
-			if ( err ) {
-				console.log(err);
-				return false;
-			}
-
-			pageSession.set('vidFileUrl', res);
-			updateVidUrl(_id, res);
-
-		});
-}
-
-// Update video url on db
-function updateVidUrl(_id, url) {
-	Meteor.call('updateVidUrl', _id, {'vidFileUrl': url});
-	//Videos.update(_id, {$set : {'vidFileUrl': url}});
 }
