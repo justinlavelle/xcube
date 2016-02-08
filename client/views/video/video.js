@@ -16,9 +16,8 @@ Template.video.onRendered( function() {
 
 	pageSession.set('vidFileUrl', video.vidFileUrl);
 
-	if (video) {
-			vidUrlResponse(video);
-	}
+	if(video.isRedtube)
+		vidUrlResponse(video);
 
 	var seoTitle = video.title;
 	var seoDescription = $('<p>').html(video.description.slice(0, 155)).text();

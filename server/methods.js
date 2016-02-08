@@ -19,12 +19,8 @@ function getNewvidUrl(_id)
   var body = request.getSync(vid.url);
     
   $ = cheerio.load(body.body);
-  console.log('a');
   _body = $('.redtube-flv-player').find('video').find('source').attr('src');
-console.log('b');
   Videos.update(_id, {$set: { vidFileUrl: _body}});
-  console.log('c');
-  console.log('New URL set ! ' + _body);
 }
 
 Meteor.methods({
@@ -33,26 +29,29 @@ Meteor.methods({
   {
     console.log(url);
 
-    if (!ValidURL(url))
+    if(ValidURL(url))
+      var res = request.headSync(url);
+    
+    if(!res || !(res.response.statusCode === 200))
     {
-      return false;
+      getNewvidUrl(_id);
     }
-
-    var res = request.headSync(url);
-    
-      if(!(res.response.statusCode === 200))
-      {
-        getNewvidUrl(_id);
-      }
-      else
-      {
-        console.log('video still exist');
-        console.log(res.response.statusCode);
-      }
-    
+    else
+    {
+      console.log('video still exist');
+      console.log(res.response.statusCode);
+    }
   },
   updateVidUrl: function(_id, val){
     if(_id)
       Videos.update(_id, {$set : val});
+  },
+  getRedtubeVidUrl: function(url)
+  {
+    var body = request.getSync(url);
+    
+    $ = cheerio.load(body.body);
+    _body = $('.redtube-flv-player').find('video').find('source').attr('src');
+    return _body;
   }
 });
