@@ -20,18 +20,24 @@ sitemaps.add('/sitemap.xml', function()
 	{
 		var category = Categories.findOne(video.category);
 
-		out.push(
-		{
+		var o = {
 			page: '/p/' + video.canonicalName,
 			videos: [
 			{
 				loc: video.vidFileUrl ? video.vidFileUrl : '',
 				title: video.title,
 				description: video.description,
-				thumbnail_loc: video.image ? video.image.url : ''
 			}],
 			changefreq: 'hourly'
-		});
+		}
+
+		if(video.image && video.image.url)
+		{
+			o.thumbnail_loc: video.image.url;
+		}
+
+		out.push(o);
+
 	});
 
 	return out;
