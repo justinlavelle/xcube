@@ -22,7 +22,15 @@ sitemaps.add('/sitemap.xml', function()
 
 		out.push(
 		{
-			page: category.canonicalName + '/' + video.canonicalName
+			page: '/p/' + video.canonicalName,
+			videos: [
+			{
+				loc: video.vidFileUrl ? video.vidFileUrl : '',
+				title: video.title,
+				description: video.description,
+				thumbnail_loc: video.image ? video.image : ''
+			}],
+			changefreq: 'hourly'
 		});
 	});
 
