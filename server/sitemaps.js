@@ -33,7 +33,7 @@ sitemaps.add('/sitemap.xml', function()
 
 		if(video.image && video.image.url)
 		{
-			o.thumbnail_loc: video.image.url;
+			o.thumbnail_loc = video.image.url;
 		}
 
 		out.push(o);
