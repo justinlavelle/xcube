@@ -1,5 +1,7 @@
-// Each theme have a page
-// Each category have a page
+function replaceAll(str, find, replace)
+{
+  return str.replace(new RegExp(find, 'g'), replace);
+}
 
 sitemaps.add('/sitemap.xml', function()
 {
@@ -19,12 +21,15 @@ sitemaps.add('/sitemap.xml', function()
 	_.each(videos, function(video)
 	{
 		var category = Categories.findOne(video.category);
+		var video.vidFileUrl = replaceAll(video.vidFileUrl, '&', '&amp;');
+		//var video.vidFileUrl = replaceAll(video.vidFileUrl, '?', '&#63;'); Is that really needed ?
 
-		var o = {
+		var o =
+		{
 			page: '/p/' + video.canonicalName,
 			videos: [
 			{
-				loc: video.vidFileUrl ? video.vidFileUrl.replace('&', '&amp;').replace('?', '&#63;') : '',
+				loc: video.vidFileUrl ? video.vidFileUrl : '',
 				title: video.title,
 				description: video.description.replace(/<(?:.|\n)*?>/gm, ''),
 			}],
