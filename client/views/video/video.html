@@ -1,5 +1,7 @@
 <template name="video">
 
+{{#if Template.subscriptionsReady}}
+
 {{#with video}}
 
 <div class="moveRight" id="main">
@@ -10,11 +12,12 @@
 		<div class="container videoCont">
 			<div class="col-md-8">
 
-			<video src="{{vidFileUrl}}" controls width="100%">
-			  Sorry, your browser doesn't support embedded videos,
-			  but don't worry, you can <a href="videofile.ogg">download it</a>
-			  and watch it with your favorite video player!
-			</video>
+					<video src="{{video.vidFileUrl}}" controls width="100%" id="video-player" style="display:{{#if videoReady}}block{{else}}none{{/if}};">
+					  Sorry, your browser doesn't support embedded videos,
+					  but don't worry, you can <a href="{{video.vidFileUrl}}">download it</a>
+					  and watch it with your favorite video player!
+					</video>
+					<h4 style="display:{{#if videoReady}}none{{else}}block{{/if}};">Your video is loading...</h4>
 			<h1 itemprop="name" class="videoTitle">{{title}}</h1>
 			<p class="videoDesc" itemprop="desc">
 				{{{description}}}
@@ -33,15 +36,16 @@
 
 </div>
 
-
 <script>
-	var disqus_config = function(){
-	this.page.url = '{{pageUrl}}';
-	this.page.identifier = '{{_id}}';
+	var disqus_config = function()
+	{
+		this.page.url = '{{pageUrl}}';
+		this.page.identifier = '{{_id}}';
 	};
-	(function() {
+
+	(function() { 
 	var d = document, s = d.createElement('script');
-	s.src = '//themia.disqus.com/embed.js';
+	s.src = '//thesexcom.disqus.com/embed.js';
 	s.setAttribute('data-timestamp', +new Date());
 	(d.head || d.body).appendChild(s);
 	})();
@@ -54,6 +58,13 @@
 </noscript>
 
 {{/with}}
+
+{{else}}
+
+Loading...
+
+{{/if}}
+
 {{> footer}}
 
 </template>

@@ -1,53 +1,73 @@
-var pageSession = new ReactiveDict();
-
-Template.video.onRendered( function() {
-
-	this.subscribe('categories');
-	this.subscribe('videos');
-
-	var video = Videos.findOne({canonicalName: FlowRouter.current().params.name});
-
-	pageSession.set('video', video);
-
-	if(!video)
+Template.video.helpers(
+{
+	video: function()
 	{
-		return FlowRouter.go('/404');
-	}
+		var video = Videos.findOne({ canonicalName: FlowRouter.current().params.name });
 
-	pageSession.set('vidFileUrl', video.vidFileUrl);
+		if(!video)
+			return FlowRouter.go('/404');
 
-	if(video.isRedtube)
-		vidUrlResponse(video);
-
-	var seoTitle = video.title;
-	var seoDescription = $('<p>').html(video.description.slice(0, 155)).text();
-
-	SEO.set(
-	{
-		title: seoTitle,
-		description: seoDescription,
-		meta:
-		{
-			'property="og:title"': seoTitle.slice(0, 54),
-			'property="og:description"': seoDescription,
-			'property="og:url"': FlowRouter.url(FlowRouter.current().path),
-			'property="og:image"': video.image ? FlowRouter.url(video.image.url) : ''
-		}
-	});
-});
-Template.video.helpers({
-	video: function() {
-		return pageSession.get('video');
+		return video;
 	},
-	vidFileUrl: function(){
-		return Videos.findOne({canonicalName: FlowRouter.current().params.name}).vidFileUrl;
+	videoReady: function()
+	{
+		return Session.get('videoReady');
 	}
+});
+
+Template.video.onRendered(function()
+{
+	var i = setInterval(function()
+	{
+		var player = $('#video-player');
+
+		if(player.prop('networkState') > 0)
+		{
+			Session.set('videoReady', true);
+			clearInterval(i);
+			console.log('ok!');
+		}
+	}, 50);
 });
 
 Template.video.onCreated(function()
 {
-	this.subscribe('categories');
-	this.subscribe('videos');
+	Session.set('videoReady', false);
+	var self = this;
+
+	self.autorun(function()
+	{
+		self.subscribe('categories');
+		self.subscribe('videos');
+	});
+
+	self.autorun(function()
+	{
+
+		if(!Template.instance().subscriptionsReady())
+			return;
+
+		var video = Videos.findOne({ canonicalName: FlowRouter.current().params.name });
+
+		if(video.isRedtube)
+			vidUrlResponse(video);
+
+		var seoTitle = video.title;
+		var seoDescription = $('<p>').html(video.description.slice(0, 155)).text();
+
+		SEO.set(
+		{
+			title: seoTitle,
+			description: seoDescription,
+			meta:
+			{
+				'property="og:title"': seoTitle.slice(0, 54),
+				'property="og:description"': seoDescription,
+				'property="og:url"': FlowRouter.url(FlowRouter.current().path),
+				'property="og:image"': video.image ? FlowRouter.url(video.image.url) : ''
+			}
+		});
+	});
 });
 
 function vidUrlResponse(video) {
