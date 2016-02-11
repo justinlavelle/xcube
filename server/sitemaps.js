@@ -29,7 +29,7 @@ sitemaps.add('/sitemap.xml', function()
 			page: '/p/' + video.canonicalName,
 			videos: [
 			{
-				loc: video.vidFileUrl ? video.vidFileUrl : '',
+				content_loc: video.vidFileUrl ? video.vidFileUrl : '',
 				title: video.title,
 				description: video.description.replace(/<(?:.|\n)*?>/gm, ''),
 			}],
