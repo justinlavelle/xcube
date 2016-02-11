@@ -21,7 +21,7 @@ sitemaps.add('/sitemap.xml', function()
 	_.each(videos, function(video)
 	{
 		var category = Categories.findOne(video.category);
-		var video.vidFileUrl = replaceAll(video.vidFileUrl, '&', '&amp;');
+		video.vidFileUrl = replaceAll(video.vidFileUrl, '&', '&amp;');
 		//var video.vidFileUrl = replaceAll(video.vidFileUrl, '?', '&#63;'); Is that really needed ?
 
 		var o =
