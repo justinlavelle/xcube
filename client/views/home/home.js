@@ -2,7 +2,7 @@ Template.home.onRendered(function()
 {
 	Tracker.autorun(function()
 	{
-		SEO.setDefaults(
+		SEO.set(
 		{
 			title: orion.dictionary.get('seo.title'),
 			description: orion.dictionary.get('seo.description'),
